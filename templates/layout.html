@@ -31,14 +31,15 @@
 									{% if session["user_id"] %}
 											<ul class="navbar-nav me-auto mt-2">
 												<li class="nav-item"><a class="nav-link" href="/myfail">失敗リスト</a></li>
+												<li class="nav-item"><a class="nav-link" href="/addfail">失敗を投稿する</a></li>
 											</ul>
 											<ul class="navbar-nav ms-auto mt-2">
-													<li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+													<li class="nav-item"><a class="nav-link" href="/logout">ログアウト</a></li>
 											</ul>
 									{% else %}
 											<ul class="navbar-nav ms-auto mt-2">
-													<li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-													<li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+													<li class="nav-item"><a class="nav-link" href="/register">登録</a></li>
+													<li class="nav-item"><a class="nav-link" href="/login">ログイン</a></li>
 											</ul>
 									{% endif %}
                 </div>

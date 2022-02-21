@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    新しい失敗
+{% endblock %}
+
+{% block main %}
+    <form action="/addfail" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="content" name="content" placeholder="失敗を記入" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">投稿</button>
+    </form>
+{% endblock %}

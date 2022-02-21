@@ -99,5 +99,19 @@ def myfail():
 
 
 
+@app.route("/addfail", methods=["GET", "POST"])
+@login_required
+def addfail():
+	if request.method == "POST":
+		res=requests.post(URL+"/fail",data={"user_id":session["user_id"],"content":request.form.get("content")})
+		return redirect("/")
+	else:
+		return render_template("addfail.html")
+
+
+
+
+
+
 if __name__ == '__main__':
    app.run(debug=True)
