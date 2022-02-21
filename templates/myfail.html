@@ -7,21 +7,16 @@
 {% block main %}
     <div class="section">
 
-        <h2>INDEX</h2>
+        <h2>失敗リスト</h2>
         <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Content</th>
-                </tr>
-            </thead>
+            
             <tbody>
                 <!-- TODO: Loop through the database entries to display them in this table -->
                 {% for f in fails  %}
-                    <tr>
-                        <td>{{ f.name }}</td>
-                        <td>{{ f.content }}</td>
-                    </tr>
+									<iframe
+										srcdoc="<h2>{{ f.name }}</h2><p>{{ f.content }}</p>"
+										
+									></iframe><br>
                 {% endfor %}
             </tbody>
         </table>
