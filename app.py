@@ -47,19 +47,51 @@ def login():
 		
 		if res.json()["name"]=="":
 			return render_template("login.html")
+		session["user_id"] = res.json()["id"]
 		return redirect("/")
 	else:
 		return render_template("login.html")
 
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+
+	if request.method == "POST":
+		name=request.form.get("username")
+		password=request.form.get("password")
+		if name=="" or password=="":
+			return render_template("register.html")
+		"""
+		if db.execute("SELECT * FROM users WHERE username=\""+request.form.get("username")+"\""):
+			return render_template("register.html")
+		"""
+		if password==request.form.get("confirmation"):
+			res=requests.post(URL+"/user",data={"name":name,"password":password})
+			#res=requests.post(URL+"/login",data={"name":name,"password":password})
+			
+			session.clear()
+			session["user_id"] = res.json()["id"]
+			return redirect("/")
+		else:
+			return render_template("register.html")
+
+
+	return render_template("register.html")
+
 
 @app.route("/")
+@login_required
 def index():
-	res = requests.get(URL+"/user")
-	print(res)
-	print(res.json())
-	jsondata=res.json()
-	print("fas:")
-	print(jsondata[0]["id"])
+	
 	return render_template("index.html")
 
 
