@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    finance
+{% endblock %}
+
+{% block main %}
+    <div class="section">
+
+        <h2>INDEX</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for f in finances  %}
+                    <tr>
+                        <td>{{ f.symbol }}</td>
+                        <td>{{ f.stock }}</td>
+                        <td>{{ f.Shares }}</td>
+                        <td>{{ f.bought_money | usd  }}</td>
+                        <td>{{ (f.bought_money*f.Shares) | usd  }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
