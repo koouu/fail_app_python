@@ -1,0 +1,9 @@
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+nav .navbar-brand .green
+{
+    color: #00FF00;
+}
