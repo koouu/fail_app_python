@@ -11,22 +11,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>Symbol</th>
                     <th>Name</th>
-                    <th>Shares</th>
-                    <th>Price</th>
-                    <th>TOTAL</th>
+                    <th>Content</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- TODO: Loop through the database entries to display them in this table -->
-                {% for f in finances  %}
+                {% for f in fails  %}
                     <tr>
-                        <td>{{ f.symbol }}</td>
-                        <td>{{ f.stock }}</td>
-                        <td>{{ f.Shares }}</td>
-                        <td>{{ f.bought_money | usd  }}</td>
-                        <td>{{ (f.bought_money*f.Shares) | usd  }}</td>
+                        <td>{{ f.name }}</td>
+                        <td>{{ f.content }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -70,10 +70,7 @@ def register():
 		password=request.form.get("password")
 		if name=="" or password=="":
 			return render_template("register.html")
-		"""
-		if db.execute("SELECT * FROM users WHERE username=\""+request.form.get("username")+"\""):
-			return render_template("register.html")
-		"""
+		
 		if password==request.form.get("confirmation"):
 			res=requests.post(URL+"/user",data={"name":name,"password":password})
 			#res=requests.post(URL+"/login",data={"name":name,"password":password})
@@ -93,6 +90,12 @@ def register():
 def index():
 	
 	return render_template("index.html")
+
+@app.route("/myfail")
+@login_required
+def myfail():
+	res=requests.get(URL+"/fail")
+	return render_template("myfail.html",fails=res.json())
 
 
 
