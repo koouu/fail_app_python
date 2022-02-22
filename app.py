@@ -94,6 +94,13 @@ def index():
 @app.route("/myfail")
 @login_required
 def myfail():
+	res=requests.get(URL+"/fail/user/"+str(session["user_id"]))
+	return render_template("myfail.html",fails=res.json())
+
+
+@app.route("/allfail")
+@login_required
+def allfail():
 	res=requests.get(URL+"/fail")
 	return render_template("myfail.html",fails=res.json())
 
