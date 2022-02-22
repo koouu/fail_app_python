@@ -88,8 +88,11 @@ def register():
 @app.route("/")
 @login_required
 def index():
-	
-	return render_template("index.html")
+	res=requests.get(URL+"/fail/user/"+str(session["user_id"]))
+	if len(res.json())==0:
+		fail={"content":"記録なし", "post_date":"なにかに挑戦してみよう！"}
+		return render_template("index.html",level=int((len(res.json())+3)/2),count=(len(res.json()))%2+1,fail=fail)
+	return render_template("index.html",level=int((len(res.json())+3)/2),count=(len(res.json()))%2+1,fail=res.json()[len(res.json())-1])
 
 @app.route("/myfail")
 @login_required
