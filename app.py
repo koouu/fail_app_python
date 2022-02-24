@@ -105,7 +105,9 @@ def myfail():
 @login_required
 def allfail():
 	res=requests.get(URL+"/fail")
-	return render_template("myfail.html",fails=res.json())
+	jsondata=res.json()
+	jsondata.reverse()
+	return render_template("myfail.html",fails=jsondata)
 
 
 
