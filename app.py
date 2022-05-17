@@ -5,6 +5,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from functools import wraps
 import datetime
+import hashlib
 
 # Configure application
 app = Flask(__name__)
@@ -42,7 +43,7 @@ def login():
 	session.clear()
 	if request.method == "POST":
 		name=request.form.get("username")
-		password=request.form.get("password")
+		password=hashlib.md5(request.form.get("password").encode()).hexdigest()
 		res=requests.post(URL+"/login",data={"name":name,"password":password})
 		
 		if res.json()["name"]=="":
@@ -67,8 +68,8 @@ def register():
 
 	if request.method == "POST":
 		name=request.form.get("username")
-		password=request.form.get("password")
-		if name=="" or password=="":
+		password=hashlib.md5(request.form.get("password").encode()).hexdigest()
+		if name=="" or request.form.get("password"):
 			return render_template("register.html")
 		
 		if password==request.form.get("confirmation"):
