@@ -43,7 +43,11 @@ def login():
 	session.clear()
 	if request.method == "POST":
 		name=request.form.get("username")
-		password=hashlib.md5(request.form.get("password").encode()).hexdigest()
+		password=request.form.get("password")
+		for i in range(5):
+			password=hashlib.md5(password.encode()).hexdigest()
+			password=hashlib.sha256(password.encode()).hexdigest()
+		
 		res=requests.post(URL+"/login",data={"name":name,"password":password})
 		
 		if res.json()["name"]=="":
@@ -68,14 +72,15 @@ def register():
 
 	if request.method == "POST":
 		name=request.form.get("username")
-		password=hashlib.md5(request.form.get("password").encode()).hexdigest()
-		if name=="" or request.form.get("password"):
+		password=request.form.get("password")
+		for i in range(5):
+			password=hashlib.md5(password.encode()).hexdigest()
+			password=hashlib.sha256(password.encode()).hexdigest()
+		if name=="" or request.form.get("password")=="":
 			return render_template("register.html")
-		
-		if password==request.form.get("confirmation"):
+		if request.form.get("password")==request.form.get("confirmation"):
 			res=requests.post(URL+"/user",data={"name":name,"password":password})
 			#res=requests.post(URL+"/login",data={"name":name,"password":password})
-			
 			session.clear()
 			session["user_id"] = res.json()["id"]
 			return redirect("/")
